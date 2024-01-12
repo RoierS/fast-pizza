@@ -1,7 +1,4 @@
-interface IGeocoding {
-  latitude: string;
-  longitude: string;
-}
+import { IGeocoding } from '@/interfaces/geocoding';
 
 export const getAddress = async ({ latitude, longitude }: IGeocoding) => {
   const res = await fetch(
