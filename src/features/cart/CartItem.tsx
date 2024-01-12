@@ -1,8 +1,8 @@
-import { IOrder } from '@/interfaces/order';
+import { ICart } from '@/interfaces/cart';
 import { formatCurrency } from '@/utils/helpers';
 
 interface ICartItemProps {
-  item: IOrder;
+  item: ICart;
 }
 
 const CartItem: React.FC<ICartItemProps> = ({ item }) => {

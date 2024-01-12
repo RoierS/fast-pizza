@@ -1,7 +1,13 @@
+import { ICart } from './cart';
+
 export interface IOrder {
-  pizzaId: number;
-  name: string;
-  quantity: number;
-  unitPrice: number;
-  totalPrice: number;
+  id: string;
+  customer: string;
+  phone: string;
+  priority: boolean;
+  estimatedDelivery: string;
+  cart: ICart[];
+  position: string;
+  orderPrice: number;
+  priorityPrice: number;
 }
