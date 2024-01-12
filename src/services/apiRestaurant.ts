@@ -1,3 +1,5 @@
+import { IOrder } from '@/interfaces/order';
+
 const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 
 export const getMenu = async () => {
@@ -17,8 +19,6 @@ export const getOrder = async (id: string) => {
   const { data } = await res.json();
   return data;
 };
-
-interface IOrder {}
 
 export const createOrder = async (newOrder: IOrder) => {
   try {
