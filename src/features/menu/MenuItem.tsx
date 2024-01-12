@@ -23,7 +23,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
       <img src={imageUrl} alt={name} />
       <div>
         <p>{name}</p>
-        <p>{ingridients.join(', ')}</p>
+        <p>{ingridients?.join(', ')}</p>
         <div>
           {!isSoldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
         </div>
