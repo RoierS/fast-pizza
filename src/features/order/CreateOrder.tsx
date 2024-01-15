@@ -1,13 +1,16 @@
-import { Form } from 'react-router-dom';
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 
 import { testCart } from '@/data/testCart';
+
+import { IErrors } from './createOrderAction';
 
 const CreateOrder: React.FC = () => {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = testCart;
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
 
-  // eslint-disable-next-line no-console
-  console.log(cart);
+  const formErrors = useActionData() as IErrors;
 
   return (
     <div>
@@ -24,6 +27,7 @@ const CreateOrder: React.FC = () => {
           <div>
             <input type="tel" name="phone" required />
           </div>
+          {formErrors?.phone && <p>{formErrors.phone}</p>}
         </div>
 
         <div>
@@ -46,7 +50,9 @@ const CreateOrder: React.FC = () => {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button>Order now</button>
+          <button disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting order' : 'Order now'}
+          </button>
         </div>
       </Form>
     </div>
