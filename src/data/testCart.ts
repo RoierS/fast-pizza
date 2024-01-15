@@ -1,6 +1,6 @@
-import { IOrder } from '@/interfaces/cart';
+import { ICart } from '@/interfaces/cart';
 
-export const testCart: IOrder[] = [
+export const testCart: ICart[] = [
   {
     pizzaId: 12,
     name: 'Mediterranean',

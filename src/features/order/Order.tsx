@@ -1,3 +1,5 @@
+import { useLoaderData } from 'react-router-dom';
+
 import { IOrder } from '@/interfaces/order';
 import {
   calculateMinutesLeft,
@@ -5,12 +7,12 @@ import {
   formatDate,
 } from '@/utils/helpers';
 
-import { order } from '../../data/testOrder';
-
 const Order: React.FC = () => {
+  const order = useLoaderData();
+
   const {
-    // id,
-    // status,
+    id,
+    status,
     priority: hasPriority,
     priorityPrice,
     orderPrice,
@@ -23,11 +25,11 @@ const Order: React.FC = () => {
   return (
     <div>
       <div>
-        <h2>Status</h2>
+        <h2>Status of order {id}</h2>
 
         <div>
-          {hasPriority && <span>Priority</span>}
-          {/* <span>{status} order</span> */}
+          {hasPriority && <span>Priority: </span>}
+          <span>{status} order</span>
         </div>
       </div>
 

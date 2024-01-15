@@ -6,17 +6,7 @@ interface IMenuItemProps {
 }
 
 const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
-  const {
-    id,
-    name,
-    unitPrice,
-    ingredients,
-    soldOut: isSoldOut,
-    imageUrl,
-  } = pizza;
-
-  // eslint-disable-next-line no-console
-  console.log(id);
+  const { name, unitPrice, ingredients, soldOut: isSoldOut, imageUrl } = pizza;
 
   return (
     <li>
