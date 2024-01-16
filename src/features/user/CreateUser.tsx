@@ -1,12 +1,24 @@
 import { SyntheticEvent, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import Button from '@/ui/Button';
+
+import { updateName } from './UserSlice';
 
 const CreateUser: React.FC = () => {
   const [username, setUsername] = useState('');
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+  };
+
+  const handleClick = () => {
+    if (!username) return;
+    dispatch(updateName(username));
+    setUsername('');
   };
 
   return (
@@ -25,7 +37,12 @@ const CreateUser: React.FC = () => {
 
       {username !== '' && (
         <div>
-          <Button type="primary" disabled={false} to="/menu">
+          <Button
+            type="primary"
+            disabled={false}
+            to="/menu"
+            onClick={handleClick}
+          >
             Start ordering
           </Button>
         </div>

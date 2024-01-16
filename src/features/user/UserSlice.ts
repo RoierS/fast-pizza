@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 import { IGeocoding } from '@/interfaces/geocoding';
 import { getAddress } from '@/services/apiGeocoding';
 
@@ -27,3 +29,21 @@ export const fetchAddress = async () => {
 
   return { position, address };
 };
+
+const initialState = {
+  username: '',
+};
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    updateName(state, action) {
+      state.username = action.payload;
+    },
+  },
+});
+
+export const { updateName } = userSlice.actions;
+
+export default userSlice.reducer;
