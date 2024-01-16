@@ -7,9 +7,16 @@ interface IButtonProps {
   disabled?: boolean;
   to?: string;
   type: string;
+  onClick?: () => void;
 }
 
-const Button: React.FC<IButtonProps> = ({ children, disabled, to, type }) => {
+const Button: React.FC<IButtonProps> = ({
+  children,
+  disabled,
+  to,
+  type,
+  onClick,
+}) => {
   const base =
     'inline-block text-sm rounded-full bg-yellow-400 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-yellow-300 focus:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed sm:px-6 text-xs sm:text-sm';
 
@@ -36,7 +43,7 @@ const Button: React.FC<IButtonProps> = ({ children, disabled, to, type }) => {
     );
 
   return (
-    <button className={styles[type]} disabled={disabled}>
+    <button className={styles[type]} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );

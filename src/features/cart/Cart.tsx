@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 
-import { testCart } from '@/data/testCart';
 import { RootState } from '@/store/store';
 import Button from '@/ui/Button';
 import LinkButton from '@/ui/LinkButton';
@@ -8,8 +7,9 @@ import LinkButton from '@/ui/LinkButton';
 import CartItem from './CartItem';
 
 const Cart = () => {
-  const cart = testCart;
   const { username } = useSelector((state: RootState) => state.user);
+
+  const { cart } = useSelector((state: RootState) => state.cart);
 
   return (
     <div className="px-4 py-3">
