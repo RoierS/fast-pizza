@@ -1,5 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 
+import Button from '@/ui/Button';
+
 const CreateUser: React.FC = () => {
   const [username, setUsername] = useState('');
 
@@ -9,9 +11,12 @@ const CreateUser: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>👋 Welcome! Please start by telling us your name:</p>
+      <p className="mb-4 text-sm text-stone-600 md:text-base">
+        👋 Welcome! Please start by telling us your name:
+      </p>
 
       <input
+        className="input mb-7 w-72"
         type="text"
         placeholder="Your full name"
         value={username}
@@ -20,7 +25,9 @@ const CreateUser: React.FC = () => {
 
       {username !== '' && (
         <div>
-          <button>Start ordering</button>
+          <Button type="primary" disabled={false} to="/menu">
+            Start ordering
+          </Button>
         </div>
       )}
     </form>

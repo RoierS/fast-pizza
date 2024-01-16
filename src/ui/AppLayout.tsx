@@ -10,10 +10,15 @@ const AppLayout: React.FC = () => {
   const isLoading = navigation.state === 'loading';
 
   return (
-    <div className="layout">
+    <div className="grid h-dvh grid-rows-[auto_1fr_auto]">
+      {isLoading && <Loader />}
       <Header />
 
-      <main>{isLoading ? <Loader /> : <Outlet />}</main>
+      <main className="overflow-auto">
+        <div className="mx-auto max-w-3xl">
+          <Outlet />
+        </div>
+      </main>
 
       <CartOverview />
     </div>

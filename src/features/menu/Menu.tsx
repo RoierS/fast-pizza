@@ -7,11 +7,8 @@ import MenuItem from './MenuItem';
 const Menu: React.FC = () => {
   const menu = useLoaderData() as IPizza[];
 
-  // eslint-disable-next-line no-console
-  console.log(menu);
-
   return (
-    <ul>
+    <ul className="divide-y-2 divide-stone-200 px-2">
       {menu.map((pizza: IPizza) => (
         <MenuItem key={pizza.id} pizza={pizza} />
       ))}
