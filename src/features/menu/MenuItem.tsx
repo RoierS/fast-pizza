@@ -1,13 +1,38 @@
+import { useDispatch } from 'react-redux';
+
 import { IPizza } from '@/interfaces/pizza';
 import Button from '@/ui/Button';
 import { formatCurrency } from '@/utils/helpers';
+
+import { addToCart } from '../cart/CartSlice';
 
 interface IMenuItemProps {
   pizza: IPizza;
 }
 
 const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
-  const { name, unitPrice, ingredients, soldOut: isSoldOut, imageUrl } = pizza;
+  const {
+    name,
+    unitPrice,
+    ingredients,
+    soldOut: isSoldOut,
+    imageUrl,
+    id,
+  } = pizza;
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice,
+    };
+
+    dispatch(addToCart(newItem));
+  };
 
   return (
     <li className="flex gap-4 py-2">
@@ -31,6 +56,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
           <Button
             disabled={isSoldOut ? true : false}
             type={isSoldOut ? 'soldOut' : 'small'}
+            onClick={handleAddToCart}
           >
             Add to Cart
           </Button>
