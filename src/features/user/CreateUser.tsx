@@ -2,6 +2,8 @@ import { SyntheticEvent, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { useNavigate } from 'react-router-dom';
+
 import Button from '@/ui/Button';
 
 import { updateName } from './UserSlice';
@@ -10,14 +12,15 @@ const CreateUser: React.FC = () => {
   const [username, setUsername] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-  };
 
-  const handleClick = () => {
     if (!username) return;
+
     dispatch(updateName(username));
+    navigate('/menu');
     setUsername('');
   };
 
@@ -37,12 +40,7 @@ const CreateUser: React.FC = () => {
 
       {username !== '' && (
         <div>
-          <Button
-            type="primary"
-            disabled={false}
-            to="/menu"
-            onClick={handleClick}
-          >
+          <Button type="primary" disabled={false}>
             Start ordering
           </Button>
         </div>
