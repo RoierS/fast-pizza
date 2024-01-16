@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IGeocoding } from '@/interfaces/geocoding';
 import { getAddress } from '@/services/apiGeocoding';
+import { RootState } from '@/store/store';
 
 interface IPositionObject {
   coords: IGeocoding;
@@ -45,5 +46,7 @@ const userSlice = createSlice({
 });
 
 export const { updateName } = userSlice.actions;
+
+export const getUsername = (state: RootState) => state.user.username;
 
 export default userSlice.reducer;

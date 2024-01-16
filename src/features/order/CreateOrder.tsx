@@ -3,8 +3,9 @@ import { Form, useActionData, useNavigation } from 'react-router-dom';
 
 import { testCart } from '@/data/testCart';
 
-import { RootState } from '@/store/store';
 import Button from '@/ui/Button';
+
+import { getUsername } from '../user/UserSlice';
 
 import { IErrors } from './createOrderAction';
 
@@ -13,7 +14,7 @@ const CreateOrder: React.FC = () => {
   const cart = testCart;
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  const { username } = useSelector((state: RootState) => state.user);
+  const username = useSelector(getUsername);
 
   const formErrors = useActionData() as IErrors;
 

@@ -1,15 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '@/store/store';
 import Button from '@/ui/Button';
 import LinkButton from '@/ui/LinkButton';
 
+import { getUsername } from '../user/UserSlice';
+
 import CartItem from './CartItem';
+import { clearCart, getCart } from './CartSlice';
+import EmptyCart from './EmptyCart';
 
 const Cart = () => {
-  const { username } = useSelector((state: RootState) => state.user);
+  const username = useSelector(getUsername);
+  const cart = useSelector(getCart);
 
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-3">
@@ -28,7 +38,7 @@ const Cart = () => {
           Order pizzas
         </Button>
 
-        <Button type="secondary" disabled={false}>
+        <Button type="secondary" disabled={false} onClick={handleClearCart}>
           Clear Cart
         </Button>
       </div>
