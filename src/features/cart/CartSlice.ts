@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { ICart } from '@/interfaces/cart';
+import { RootState } from '@/store/store';
 
 interface ICartState {
   cart: ICart[];
@@ -53,5 +54,11 @@ export const {
   decreaseQuatity,
   clearCart,
 } = cartSlice.actions;
+
+export const getTotalCartPrice = (state: RootState) =>
+  state.cart.cart.reduce((acc, curr) => curr.totalPrice + acc, 0);
+
+export const getTotalQuantity = (state: RootState) =>
+  state.cart.cart.reduce((acc, curr) => curr.quantity + acc, 0);
 
 export default cartSlice.reducer;
