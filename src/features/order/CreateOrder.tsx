@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 
 import { testCart } from '@/data/testCart';
 
+import { RootState } from '@/store/store';
 import Button from '@/ui/Button';
 
 import { IErrors } from './createOrderAction';
@@ -11,6 +13,7 @@ const CreateOrder: React.FC = () => {
   const cart = testCart;
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const { username } = useSelector((state: RootState) => state.user);
 
   const formErrors = useActionData() as IErrors;
 
@@ -23,7 +26,13 @@ const CreateOrder: React.FC = () => {
       <Form method="POST">
         <div className="mb-4 flex flex-col gap-1 sm:mb-6 sm:flex-row sm:items-center sm:gap-2">
           <label className="sm:basis-40">First Name</label>
-          <input className="input grow" type="text" name="customer" required />
+          <input
+            className="input grow"
+            type="text"
+            name="customer"
+            required
+            defaultValue={username}
+          />
         </div>
 
         <div
