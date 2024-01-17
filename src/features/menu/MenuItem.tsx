@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IPizza } from '@/interfaces/pizza';
 import Button from '@/ui/Button';
 import { formatCurrency } from '@/utils/helpers';
 
-import { addToCart } from '../cart/CartSlice';
+import { addToCart, getCurrentQuantityById } from '../cart/CartSlice';
+import DeleteItem from '../cart/DeleteItem';
 
 interface IMenuItemProps {
   pizza: IPizza;
@@ -19,6 +20,8 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
     imageUrl,
     id,
   } = pizza;
+
+  const currentQuantity = useSelector(getCurrentQuantityById(id));
 
   const dispatch = useDispatch();
 
@@ -52,14 +55,17 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
           ) : (
             <p className="font-md text-sm uppercase text-stone-500">Sold out</p>
           )}
-
-          <Button
-            disabled={isSoldOut ? true : false}
-            type={isSoldOut ? 'soldOut' : 'small'}
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </Button>
+          {currentQuantity > 0 ? (
+            <DeleteItem pizzaId={id} />
+          ) : (
+            <Button
+              disabled={isSoldOut ? true : false}
+              type={isSoldOut ? 'soldOut' : 'small'}
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </Button>
+          )}
         </div>
       </div>
     </li>
