@@ -6,6 +6,7 @@ import { formatCurrency } from '@/utils/helpers';
 
 import { addToCart, getCurrentQuantityById } from '../cart/CartSlice';
 import DeleteItem from '../cart/DeleteItem';
+import UpdateItemQuantity from '../cart/UpdateItemQuantity';
 
 interface IMenuItemProps {
   pizza: IPizza;
@@ -56,7 +57,10 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
             <p className="font-md text-sm uppercase text-stone-500">Sold out</p>
           )}
           {currentQuantity > 0 ? (
-            <DeleteItem pizzaId={id} />
+            <div className="flex items-center gap-x-3 sm:gap-x-8">
+              <UpdateItemQuantity pizzaId={id} />
+              <DeleteItem pizzaId={id} />
+            </div>
           ) : (
             <Button
               disabled={isSoldOut ? true : false}

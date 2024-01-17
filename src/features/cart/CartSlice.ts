@@ -17,14 +17,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       // payload => newItem
-
-      const isItemAlreadyInCart = !!state.cart.find(
-        (item) => item.pizzaId === action.payload.pizzaId,
-      );
-
-      if (!isItemAlreadyInCart) {
-        state.cart.push(action.payload);
-      }
+      state.cart.push(action.payload);
     },
     deleteFromCart(state, action) {
       // payload => pizzaId
@@ -46,6 +39,10 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity--;
         item.totalPrice = item.unitPrice * item.quantity;
+
+        if (item.quantity === 0) {
+          cartSlice.caseReducers.deleteFromCart(state, action);
+        }
       }
     },
     clearCart(state) {
