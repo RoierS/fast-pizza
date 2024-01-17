@@ -1,22 +1,32 @@
+import { useState } from 'react';
+
 import { useSelector } from 'react-redux';
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 
-import { testCart } from '@/data/testCart';
-
 import Button from '@/ui/Button';
 
+import { formatCurrency } from '@/utils/helpers';
+
+import { getCart, getTotalCartPrice } from '../cart/CartSlice';
+import EmptyCart from '../cart/EmptyCart';
 import { getUsername } from '../user/UserSlice';
 
 import { IErrors } from './createOrderAction';
 
 const CreateOrder: React.FC = () => {
-  // const [withPriority, setWithPriority] = useState(false);
-  const cart = testCart;
+  const [isWithPriority, setisWithPriority] = useState(false);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const username = useSelector(getUsername);
+  const cart = useSelector(getCart);
+
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const priorityPrice = isWithPriority ? Math.round(totalCartPrice * 0.2) : 0;
+  const totalPrice = totalCartPrice + priorityPrice;
 
   const formErrors = useActionData() as IErrors;
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
@@ -76,18 +86,21 @@ const CreateOrder: React.FC = () => {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+            value={String(isWithPriority)}
+            onChange={(e) => setisWithPriority(e.target.checked)}
           />
           <label htmlFor="priority" className="font-medium">
             Want to yo give your order priority?
           </label>
         </div>
 
+        {/* hidden input to pass cart object */}
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting order' : 'Order now'}
+            {isSubmitting
+              ? 'Submitting order'
+              : `Order now ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
