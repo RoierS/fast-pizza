@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useFetcher } from 'react-router-dom';
+
+import { IPizza } from '@/interfaces/pizza';
 import Button from '@/ui/Button';
 import LinkButton from '@/ui/LinkButton';
 
@@ -15,9 +20,17 @@ const Cart = () => {
 
   const dispatch = useDispatch();
 
+  const fetcher = useFetcher();
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
+  useEffect(() => {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  }, [fetcher]);
 
   if (!cart.length) return <EmptyCart />;
 
@@ -29,7 +42,15 @@ const Cart = () => {
 
       <ul className="mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item) => (
-          <CartItem key={item.pizzaId} item={item} />
+          <CartItem
+            key={item.pizzaId}
+            item={item}
+            isLoadingItem={fetcher.state === 'loading'}
+            image={
+              fetcher.data?.find((el: IPizza) => el.id === item.pizzaId)
+                .imageUrl
+            }
+          />
         ))}
       </ul>
 

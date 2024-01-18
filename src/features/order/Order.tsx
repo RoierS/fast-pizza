@@ -1,6 +1,9 @@
-import { useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import { useFetcher, useLoaderData } from 'react-router-dom';
 
 import { IOrder } from '@/interfaces/order';
+import { IPizza } from '@/interfaces/pizza';
 import {
   calculateMinutesLeft,
   formatCurrency,
@@ -11,6 +14,15 @@ import OrderItem from './OrderItem';
 
 const Order: React.FC = () => {
   const order = useLoaderData();
+
+  // loading menu data from '/menu' route
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  }, [fetcher]);
 
   const {
     id,
@@ -54,7 +66,21 @@ const Order: React.FC = () => {
 
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} key={item.pizzaId} />
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+            isLoadingIngredients={fetcher.state === 'loading'}
+            ingredients={
+              fetcher.data?.find(
+                (fetcherItem: IPizza) => fetcherItem.id === item.pizzaId,
+              ).ingredients
+            }
+            image={
+              fetcher.data?.find(
+                (fetcherItem: IPizza) => fetcherItem.id === item.pizzaId,
+              ).imageUrl
+            }
+          />
         ))}
       </ul>
 

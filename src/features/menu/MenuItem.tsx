@@ -43,7 +43,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
       <img
         src={imageUrl}
         alt={name}
-        className={`h-24 ${isSoldOut ? 'opacity-70 grayscale' : ''}`}
+        className={`h-24 rounded-full ${isSoldOut ? 'opacity-70 grayscale' : ''}`}
       />
       <div className="flex flex-auto flex-col pt-0.5">
         <p className="font-medium">{name}</p>
