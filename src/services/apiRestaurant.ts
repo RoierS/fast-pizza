@@ -1,5 +1,5 @@
-import { ICart } from '@/interfaces/cart';
 import { INewOrder } from '@/interfaces/newOrder';
+import { IUpdateOrder } from '@/interfaces/updateOrder';
 
 const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 
@@ -40,7 +40,7 @@ export const createOrder = async (newOrder: INewOrder) => {
   }
 };
 
-export const updateOrder = async (id: string, updatedOrder: ICart) => {
+export const updateOrder = async (id: string, updatedOrder: IUpdateOrder) => {
   try {
     const res = await fetch(`${API_URL}/order/${id}`, {
       method: 'PATCH',

@@ -11,9 +11,10 @@ import {
 } from '@/utils/helpers';
 
 import OrderItem from './OrderItem';
+import UpdateOrder from './UpdateOrder';
 
 const Order: React.FC = () => {
-  const order = useLoaderData();
+  const order = useLoaderData() as IOrder;
 
   // loading menu data from '/menu' route
   const fetcher = useFetcher();
@@ -32,7 +33,7 @@ const Order: React.FC = () => {
     orderPrice,
     estimatedDelivery,
     cart,
-  } = order as IOrder;
+  } = order;
 
   const deliverIn = calculateMinutesLeft(estimatedDelivery);
 
@@ -98,6 +99,8 @@ const Order: React.FC = () => {
           {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      {!hasPriority && <UpdateOrder order={order} />}
     </div>
   );
 };

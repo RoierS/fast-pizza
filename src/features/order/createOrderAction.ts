@@ -12,6 +12,7 @@ export interface IErrors {
 }
 
 export const createOrderAction = async ({ request }: { request: Request }) => {
+  // reading data from form
   const formData: FormData = await request.formData();
 
   const data = Object.fromEntries(formData) as unknown as INewOrder;
