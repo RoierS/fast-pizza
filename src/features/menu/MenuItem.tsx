@@ -47,7 +47,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
       />
       <div className="flex flex-auto flex-col pt-0.5">
         <p className="font-medium">{name}</p>
-        <p className="text-sm capitalize italic text-stone-500">
+        <p className="mb-2 text-sm capitalize italic text-stone-500">
           {ingredients.join(', ')}
         </p>
         <div className="mt-auto flex items-center justify-between gap-x-1">
@@ -57,7 +57,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ pizza }) => {
             <p className="font-md text-sm uppercase text-stone-500">Sold out</p>
           )}
           {currentQuantity > 0 ? (
-            <div className="flex items-center gap-x-3 sm:gap-x-8">
+            <div className="xs:flex-row flex flex-col items-center justify-center gap-3 sm:gap-x-8">
               <UpdateItemQuantity pizzaId={id} />
               <DeleteItem pizzaId={id} />
             </div>

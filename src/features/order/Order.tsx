@@ -26,7 +26,7 @@ const Order: React.FC = () => {
 
   return (
     <div className="space-y-8 px-4 py-6">
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="text-xl font-semibold">Status of order #{id}</h2>
 
         <div className="space-x-2">
