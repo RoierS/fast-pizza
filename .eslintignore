@@ -1,0 +1,10 @@
+.eslintrc.cjs
+webpack
+eslintrc
+package.json
+tsconfig.json
+webpack.config.js
+webpack.dev.config
+webpack.prod.config
+webpack.*.js
+tailwind.config.js
