@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IGeocoding } from '@/interfaces/geocoding';
 import { getAddress } from '@/services/apiGeocoding';
 import { RootState } from '@/store/store';
+import { localStorageHelper } from '@/utils/localStorageHelper';
 
 interface IPositionObject {
   coords: IGeocoding;
@@ -45,7 +46,7 @@ interface initialState {
 }
 
 const initialState: initialState = {
-  username: '',
+  username: localStorageHelper('username', 'load'),
   status: 'idle',
   position: {},
   address: '',
@@ -58,6 +59,7 @@ const userSlice = createSlice({
   reducers: {
     updateName(state, action) {
       state.username = action.payload;
+      localStorageHelper('username', 'save', action.payload);
     },
   },
   extraReducers: (builder) =>

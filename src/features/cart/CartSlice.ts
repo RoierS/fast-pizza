@@ -2,13 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { ICart } from '@/interfaces/cart';
 import { RootState } from '@/store/store';
+import { localStorageHelper } from '@/utils/localStorageHelper';
 
 interface ICartState {
   cart: ICart[];
 }
 
 const initialState: ICartState = {
-  cart: [],
+  cart: localStorageHelper('cart', 'load'),
 };
 
 const cartSlice = createSlice({
@@ -18,10 +19,12 @@ const cartSlice = createSlice({
     addToCart(state, action) {
       // payload => newItem
       state.cart.push(action.payload);
+      localStorageHelper('cart', 'save', state.cart);
     },
     deleteFromCart(state, action) {
       // payload => pizzaId
       state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
+      localStorageHelper('cart', 'save', state.cart);
     },
     increaseQuatity(state, action) {
       // payload => pizzaId
@@ -30,6 +33,7 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity++;
         item.totalPrice = item.unitPrice * item.quantity;
+        localStorageHelper('cart', 'save', state.cart);
       }
     },
     decreaseQuatity(state, action) {
@@ -43,10 +47,12 @@ const cartSlice = createSlice({
         if (item.quantity === 0) {
           cartSlice.caseReducers.deleteFromCart(state, action);
         }
+        localStorageHelper('cart', 'save', state.cart);
       }
     },
     clearCart(state) {
       state.cart = [];
+      localStorageHelper('cart', 'save', state.cart);
     },
   },
 });
