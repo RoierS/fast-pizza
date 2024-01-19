@@ -117,7 +117,7 @@ Build for production:
 npm run build
 ```
 
-Or simply visit [Fast Pizza Co. 🍕](https://www.fastpizzaco.com)
+Or simply visit [Fast Pizza Co. 🍕](https://fastpizzza.netlify.app/)
 
 
 ## 🤝 Contributing
