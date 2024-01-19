@@ -14,6 +14,7 @@ const CreateUser: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // create user and navigates to "menu"
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 

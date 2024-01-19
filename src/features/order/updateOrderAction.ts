@@ -8,6 +8,8 @@ export const updateOrderAction = async ({
   params: Params<'orderId'>;
 }) => {
   const data = { priority: true };
+
+  // updating order priority
   if (params.orderId) {
     await updateOrder(params.orderId, data);
   }

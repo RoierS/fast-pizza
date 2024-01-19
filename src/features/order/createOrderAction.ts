@@ -18,6 +18,7 @@ export const createOrderAction = async ({ request }: { request: Request }) => {
   const data = Object.fromEntries(formData) as unknown as INewOrder;
   const cart = formData.get('cart') as string;
 
+  // new order with form data
   const order = {
     ...data,
     cart: JSON.parse(cart),
@@ -34,7 +35,9 @@ export const createOrderAction = async ({ request }: { request: Request }) => {
   // if all ok create new order and redirect
   const newOrder = await createOrder(order);
 
+  // clear cart after order
   store.dispatch(clearCart());
 
+  // redirect to order summary
   return redirect(`/order/${newOrder.id}`);
 };

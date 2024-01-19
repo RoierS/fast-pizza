@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getUsername } from './UserSlice';
 
 const Username: React.FC = () => {
+  // getting username frome store
   const username = useSelector(getUsername);
 
   if (!username) return null;

@@ -19,13 +19,13 @@ const Cart = () => {
   const cart = useSelector(getCart);
 
   const dispatch = useDispatch();
-
   const fetcher = useFetcher();
 
   const handleClearCart = () => {
     dispatch(clearCart());
   };
 
+  // fetch pizza images from '/menu route'
   useEffect(() => {
     if (!fetcher.data && fetcher.state === 'idle') {
       fetcher.load('/menu');

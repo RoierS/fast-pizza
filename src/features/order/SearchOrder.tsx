@@ -6,6 +6,7 @@ const SearchOrder: React.FC = () => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
+  // handle order search and navigate to order summary
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 

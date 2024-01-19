@@ -132,7 +132,7 @@ const CreateOrder: React.FC = () => {
         </div>
 
         <div>
-          {/* hidden input to pass cart object */}
+          {/* hidden inputs to pass cart object and position */}
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <input
             type="hidden"
