@@ -15,8 +15,8 @@ const CartItem: React.FC<ICartItemProps> = ({ item, image, isLoadingItem }) => {
   const { pizzaId, name, quantity, totalPrice } = item;
 
   return (
-    <li className="s:flex xs:items-center xs:justify-between block py-3">
-      <div className="flex-raw mb-2 flex items-center justify-center gap-2 sm:mb-0">
+    <li className="s:flex xs:items-center xs:justify-between block gap-2 py-3">
+      <div className="flex-raw mb-2 flex items-center justify-start gap-2 sm:mb-0">
         <div className=" flex items-center justify-center">
           {isLoadingItem ? (
             <Spinner />
