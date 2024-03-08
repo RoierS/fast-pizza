@@ -2,6 +2,9 @@
 
 Fast Pizza Co. is a web application that allows users to order pizzas 🍕 from a menu 📜 without creating an account or logging in. Users can add multiple pizzas to a cart 🛒, provide their name 📇, phone number 📱, and address 🏠, and place their order with a simple POST request. Users can also mark their order as "priority" 🔝 for an additional 20% of the 🛒 cart price, either before or after placing the order. Each order will get a unique ID 🆔 that can be used to look up the order status . Payments 💵 are made on delivery, so no payment processing is necessary in the app.
 
+![fast-pizza-app-rwd-preview](https://github.com/RoierS/fast-pizza/assets/111195111/e616938f-9ab2-433a-afd2-b44220e9468e)
+
+
 
 ## 🛠️ Tech Stack
 
